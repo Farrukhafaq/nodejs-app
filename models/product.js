@@ -6,6 +6,7 @@ const products = [];
 const p = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
 
 const getProductsFromFile = (cb) => {
+    console.log(cb);
     fs.readFile(p, (err, fileContent) => {
         if(err){
             cb([]);
@@ -16,8 +17,11 @@ const getProductsFromFile = (cb) => {
 }
 
 module.exports = class Products{
-    constructor(t){
-        this.title = t;
+    constructor(title, imageUrl, price, description){
+        this.title = title;
+        this.imageUrl = imageUrl;
+        this.price = price;
+        this.description = description;
     }
 
     save(){ 
@@ -30,6 +34,7 @@ module.exports = class Products{
     }
 
     static fetchAll(cb){
+        console.log(this.imageUrl);
         getProductsFromFile(cb);
     }
 }
